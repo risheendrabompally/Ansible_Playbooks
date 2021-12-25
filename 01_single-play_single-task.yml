@@ -1,0 +1,13 @@
+---
+
+- name: update web servers
+  hosts: web
+
+  tasks: 
+  - name: Ensure web directory is created
+    file: 
+      path: /home/ec2-user/web
+      state: directory
+
+...
+
