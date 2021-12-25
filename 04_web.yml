@@ -1,0 +1,23 @@
+---
+
+- name: update web servers
+  hosts: web
+
+  tasks: 
+  - name: Ensure Apache HTTP is Installed
+    yum: 
+      name: httpd
+      state: installed
+
+  - name: Ensure Apache HTTP is Started
+    service: 
+      name: httpd
+      state: started
+
+  - name: Ensure Apache HTTP is Enabled
+    service: 
+      name: httpd
+      enabled: yes
+
+...
+
