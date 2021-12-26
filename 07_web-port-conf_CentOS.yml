@@ -5,6 +5,11 @@
 
   tasks:
 
+ - name: SELinux setting as permissive
+    selinux:
+      policy: targeted
+      state: permissive
+
   - name: Copy conf file
     copy: 
       src: httpd.conf
