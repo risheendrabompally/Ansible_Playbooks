@@ -1,0 +1,24 @@
+---
+
+- name: update web servers
+  hosts: web
+
+  tasks:
+
+  - name: SELinux setting as permissive
+    selinux: 
+      policy: targeted
+      state: permissive
+
+  - name: Copy conf file
+    copy: 
+      src: httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+
+  - name: Restarting HTTPD as config changes are made
+    service: 
+      name: httpd
+      state: restarted
+
+...
+
