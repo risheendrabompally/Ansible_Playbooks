@@ -1,0 +1,15 @@
+---
+
+- name: update n3 server
+  hosts: n1
+  become: yes
+
+  tasks:
+
+  - name: Copy static.html file to httpd path
+    copy: 
+      src: static.html
+      dest: /var/www/html/food/static.html
+
+...
+

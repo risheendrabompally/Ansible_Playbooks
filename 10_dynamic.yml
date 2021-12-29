@@ -1,0 +1,17 @@
+---
+
+- name: update n3 server
+  hosts: ub1
+  become: yes
+  vars:
+    my_user: Risheendra
+
+  tasks:
+
+  - name: Copy dynamic file to httpd path
+    template: 
+      src: dynamic.j2
+      dest: /var/www/html/dynamic.html
+
+...
+

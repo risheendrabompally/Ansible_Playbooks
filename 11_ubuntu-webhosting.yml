@@ -1,0 +1,26 @@
+---
+
+- name: update ubuntu servers
+  hosts: ub1
+  become: yes  
+
+  tasks:
+
+
+  - name: Ensure Apache2 is Installed
+    apt: 
+      name: apache2
+      state: present
+
+  - name: Ensure Apache HTTP is Started
+    service: 
+      name: apache2
+      state: started
+
+  - name: Ensure Apache HTTP is Enabled
+    service: 
+      name: apache2
+      enabled: yes
+
+...
+

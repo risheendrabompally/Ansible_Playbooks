@@ -1,0 +1,65 @@
+---
+
+- name: update n3 server
+  hosts: n1
+  become: yes
+  vars:
+    port1: 90
+    port2: 8989
+
+  tasks:
+
+  - name: Ensure Git is Installed
+    yum: 
+      name: git
+      state: installed
+
+  - name: Ensure HTTPD is Installed
+    yum: 
+      name: httpd
+      state: installed
+
+  - name: Ensure HTTPD is Started
+    service: 
+      name: httpd
+      state: started
+
+  - name: Ensure HTTPD is Enabled
+    service: 
+      name: httpd
+      enabled: yes
+
+  - name: Copy conf changes file to conf path
+    template: 
+      src: /home/ec2-user/Ansible_Playbooks/httpd.j2
+      dest: /etc/httpd/conf/httpd.conf
+
+  - name: Ensure HTTPD is Restarted after making config changes
+    service: 
+      name: httpd
+      state: restarted
+
+  - name: Ensure Essence code is downloaded
+    git: 
+      repo: https://github.com/ravi2krishna/ecomm.git
+      dest: /home/ec2-user/ecomm
+
+  - name: Ensure Food code is downloaded
+    git: 
+      repo: https://github.com/ravi2krishna/food.git
+      dest: /home/ec2-user/food
+
+  - name: Copy Essence code to httpd path
+    copy: 
+      src: /home/ec2-user/ecomm
+      dest: /var/www/html/
+      remote_src: yes  
+
+  - name: Copy Food code to httpd path
+    copy: 
+      src: /home/ec2-user/food
+      dest: /var/www/html/
+      remote_src: yes
+
+...
+
